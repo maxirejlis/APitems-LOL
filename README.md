@@ -9,5 +9,5 @@ An API Data retreival project which uses the LOL Api to populate a MySQL Table.
 A Data project to manage the connection with MySql.
 
 
-And a Web Project for the Web View (I'm currently deploying the site so it might not be available yet).
+And a Web Project for the Web View http://apitemlol.heliohost.org/ (I'm currently deploying the site so it might not be available yet).
 
