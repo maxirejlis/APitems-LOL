@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiDataRetriever", "ApiDataRetriever\ApiDataRetriever.csproj", "{4350E061-321C-406E-9A17-CEEA53E74F8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{A996F112-71F5-4476-8CAA-813F7C5052A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LolApItemWeb", "LolApItemWeb\LolApItemWeb.csproj", "{39FD0619-A15C-4B10-94A0-E5E4A3D3DB09}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4350E061-321C-406E-9A17-CEEA53E74F8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4350E061-321C-406E-9A17-CEEA53E74F8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4350E061-321C-406E-9A17-CEEA53E74F8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4350E061-321C-406E-9A17-CEEA53E74F8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A996F112-71F5-4476-8CAA-813F7C5052A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A996F112-71F5-4476-8CAA-813F7C5052A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A996F112-71F5-4476-8CAA-813F7C5052A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A996F112-71F5-4476-8CAA-813F7C5052A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39FD0619-A15C-4B10-94A0-E5E4A3D3DB09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39FD0619-A15C-4B10-94A0-E5E4A3D3DB09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39FD0619-A15C-4B10-94A0-E5E4A3D3DB09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39FD0619-A15C-4B10-94A0-E5E4A3D3DB09}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@section scripts
+{
+    <script type="text/javascript">
+        window.UrlGetData = "@Url.Action("GetData", "Home")";
+    </script>
+    <script src="~/Scripts/Site/Index.js" type="text/javascript"></script>
+}
+
+<h2>Hola Nacho</h2>
+<button id="btnTest">Traer Datos</button>

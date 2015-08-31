@@ -1,0 +1,212 @@
+﻿@model LolApItemWeb.ViewModels.HomeViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        window.UrlGetChampionData = "@Url.Action("GetChampionData", "Home")";
+        window.UrlGetAvailableChampions = "@Url.Action("GetAvailableChampions", "Home")"
+    </script>
+    <script src="~/Scripts/LoadingBar.js"></script>
+    <script src="~/Scripts/Site/Index.js" type="text/javascript"></script>
+
+
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="~/Content/themes/css/bootstrap.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="~/Content/themes/css/bootstrap-theme.min.css">
+    <style>
+        .container
+        {
+            margin-top: 50px;
+        }
+
+        .champion-all
+        {
+            cursor: pointer;
+            opacity: 0.7;
+        }
+
+            .champion-all:hover
+            {
+                opacity: 1;
+            }
+
+        .champion
+        {
+            cursor: pointer;
+            opacity: 0.7;
+        }
+
+            .champion:hover
+            {
+                opacity: 1;
+            }
+
+        .msg
+        {
+            font-size: 2em;
+            color: darkgray;
+        }
+
+        .dropdown
+        {
+            width: 150px;
+        }
+    </style>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script type="text/template" id="template-item-data">
+        <td style="width: 40px; padding: 2px;">
+            <img class="item-image" src="" style="width: 40px; height: 40px" title="name" />
+            <p class="item-pickrate">Pick Rate : </p>
+        </td>
+    </script>
+
+    <script type="text/template" id="template-row-item-data">
+        <tr>
+            <td class="table-minute"></td>
+            <td class="table-items">
+                <table>
+                    <tr class="item">
+                    </tr>
+                </table>
+            </td>
+            <td class="table-totalGames"></td>
+        </tr>
+    </script>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1','packages':['timeline']}]}"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1','packages':['corechart']}]}"></script>
+    @*<script type="text/javascript" src="https://www.google.com/jsapi"></script>*@
+}
+
+
+
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="nav-container">
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand page-scroll" href="#page-top">Apitems LOL</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                <li class="hidden">
+                    <a class="page-scroll" href="#page-top"></a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#champions">Champions</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#charts" disabled="true" readonly="true" style="cursor: default">Chart</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#tables" disabled="true" readonly="true" style="cursor: default">Item Table</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<div class="container">
+    <br />
+    <br />
+    <div class="data-container">
+        <div class="page-header">
+            <h1>Champion Select</h1>
+        </div>
+        <div class="champion-filters" style="height: 80px;">
+            <span>Roles:&nbsp;</span>
+            @Html.DropDownListFor(m => m.Roles, Model.Roles, "All", new { @class = "role-filter dropdown" })
+            <span>Ranks:&nbsp;</span>
+            @Html.DropDownListFor(m => m.Ranks, Model.Ranks, "All", new { @class = "rank-filter dropdown" })
+            <div class="msg">Only displaying champions with at least 5 games in NA ranked</div>
+        </div>
+        <section id="champions">
+            <div class="champions row">
+                <div class="col-md-12">
+                    <p style="font-size: 11px; text-align: center;">
+                        <img class="champion-all" src="http://img2.wikia.nocookie.net/__cb20150208054547/leagueoflegends/images/thumb/9/95/ChampionSquare.png/110px-ChampionSquare.png" style="width: 100px; height: 100px;" data-nombre="All" data-id="-1" data-target=".ap-charts-container" />
+                        <br />
+                        All
+                    </p>
+                </div>
+            </div>
+            <div class="champions row">
+                @foreach (var champion in Model.Champions)
+                {
+                    <div class="col-md-1" style="display: none">
+                        <p style="font-size: 11px; text-align: center;">
+                            <img class="champion" src="@champion.ImageUrl" title="@champion.Name" style="width:100px; height:100px;" data-nombre="@champion.Name" data-id="@champion.Id" data-target=".ap-charts-container"/>
+                            <br />
+                            @champion.Name
+                        </p>
+                    </div>
+                     
+                }
+            </div>
+        </section>
+
+        <section id="charts" style="display: none">
+            <div class="page-header">
+                <h1>AP-MR Comparison Graph</h1>
+            </div>
+            <div id="ap-chart" style="width: 100%; height: 600px;"></div>
+        </section>
+
+
+        <section id="tables" style="display: none">
+            <div class="page-header">
+                <h1>Item Comparison Per Minute </h1>
+            </div>
+
+            <div class="message msg" style="display: none"></div>
+            <div class="Table-Patch511 col-xs-6">
+                <h1>Patch 5.11</h1>
+                <table class="item-by-minute-511 table table-striped table-condensed">
+                    <thead class="table-minute-header">
+                        <tr>
+                            <th>Minute</th>
+                            <th>Item</th>
+                            <th>Total Observed Games</th>
+                        </tr>
+                    </thead>
+                    <tbody class="item-by-minute-data">
+                    </tbody>
+                </table>
+            </div>
+            <div class="Table-Patch514 col-xs-6">
+                <h1>Patch 5.14</h1>
+                <table class="item-by-minute-514 table table-striped table-condensed">
+                    <thead class="table-minute-header">
+                        <tr>
+                            <th>Minute</th>
+                            <th>Item</th>
+                            <th>Total Observed Games</th>
+                        </tr>
+                    </thead>
+                    <tbody class="item-by-minute-data">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+</div>
